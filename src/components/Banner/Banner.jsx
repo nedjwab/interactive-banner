@@ -41,16 +41,16 @@ function App() {
           className="banner-image"
         />
         <div className={`banner-overlay ${timeOfDay}`} />
-        <div className="banner-content">
+        <div className="banner-content" data-aos="fade-up-right">
           <div className="banner-text">
             <div className="banner-icons">
               <GiPieSlice className="icon large" />
               <CakeIcon className="icon large" />
             </div>
-            <h1 className="banner-title">
+            <h1 className="banner-title animate__animated animate__bounceInLeft" >
               {bannerTitle}
             </h1>
-            <p className="banner-description">
+            <p className="banner-description animate__animated animate__bounceInRight">
               {bannerText}
             </p>
           </div>
@@ -98,15 +98,16 @@ function App() {
           </div>
 
           <div className="control-section">
-            <h3 className="control-heading">
+            <h3 className="control-heading" >
               <CiCamera className="icon" /> Background Image
             </h3>
-            <div className="image-grid">
+            <div className="image-grid" >
               {images.map((image, index) => (
                 <button
                   key={index}
                   onClick={() => setSelectedImage(index)}
                   className={`image-button ${selectedImage === index ? 'selected' : ''}`}
+                  data-aos="flip-right"
                 >
                   <img
                     src={image}
