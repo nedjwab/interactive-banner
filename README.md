@@ -3,10 +3,7 @@
 # Web App for interactive banner design 
 An engaging, dynamic banner section for web applications with user-triggered animations and interactions
 
-
-## Demo Video
-
-[![Demo Video]](https://github.com/nedjwab/interactive-banner/blob/create-banner/src/assets/images/demo.webm)
+![alt text](https://github.com/nedjwab/Covid19-tracker/blob/deploy/src/assets/demo.png)
 
 
 ## Built With 🔨
@@ -22,6 +19,7 @@ An engaging, dynamic banner section for web applications with user-triggered ani
 ### Installation 
 - clone this repo  `git clone https://github.com/nedjwab/interactive-banner.git` on your terminal.
 - Type `cd interactive-banner` to access the project on the terminal.
+- Switch to the feature branch `git checkout create-banner`
 
 #### Install dependencies
 ```
