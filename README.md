@@ -3,7 +3,7 @@
 # Web App for interactive banner design 
 An engaging, dynamic banner section for web applications with user-triggered animations and interactions
 
-![alt text](https://github.com/nedjwab/Covid19-tracker/blob/deploy/src/assets/demo.png)
+![alt text](https://github.com/nedjwab/interactive-banner/blob/create-banner/src/assets/images/demo.png)
 
 
 ## Built With 🔨
