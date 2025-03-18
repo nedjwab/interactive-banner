@@ -199,3 +199,17 @@ body {
   width: 32px;
   height: 32px;
 }
+
+@media (max-width: 768px) {
+  .time-buttons {
+    flex-direction: column; 
+    gap: 8px;  
+    padding: 0 16px; 
+  }
+  
+  .time-buttons button {
+    width: 100%;
+    padding: 12px; 
+  }
+}
+
