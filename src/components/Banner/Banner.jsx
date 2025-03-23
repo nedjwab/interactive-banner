@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { LuCroissant } from "react-icons/lu";
 import { CiText,CiCamera } from "react-icons/ci";
 import { TbCookie } from "react-icons/tb";
@@ -10,30 +10,45 @@ import gateaux from '../../assets/images/gateaux.jpg';
 import sweet from '../../assets/images/sweet.jpg';
 import './Banner.css';
 
-function App() {
+const App = () => {
   const [timeOfDay, setTimeOfDay] = useState('croissanthours');
   const [bannerTitle, setBannerTitle] = useState('Coffee & Pastries: The Perfect Pair!');
   const [bannerText, setBannerText] = useState(
-    'Start your day with the perfect blend of rich, aromatic coffee and freshly baked pastries. A match made in heaven for every coffee lover!.'
+    'Start your day with the perfect blend of rich, aromatic coffee and freshly baked pastries. A match made in heaven for every coffee lover!'
   );
   const [selectedImage, setSelectedImage] = useState(0);
+  const [errors, setErrors] = useState({ title: '', text: '' });
   
-  const images = [
-    coffee,
-    cup,
-    gateaux,
-    sweet
-  ];
-
-  const CakeIcon = {
-    croissanthours:  LuCroissant,
+  const images = [coffee, cup, gateaux, sweet];
+  
+  const CakeIcon = useMemo(() => ({
+    croissanthours: LuCroissant,
     macarontime: TbCookie,
-    pieoclock:GiPieSlice,
-    mooncakemode:BsCake2
-  }[timeOfDay];
-
+    pieoclock: GiPieSlice,
+    mooncakemode: BsCake2
+  }[timeOfDay]), [timeOfDay]);
   
-
+  const changeTitle = (e) => {
+    const title = e.target.value;
+    if (!title.trim()) {
+      setErrors((prev) => ({ ...prev, title: 'Title should be more than 0 characters' }));
+      return;
+    }
+    setBannerTitle(title);
+    setErrors((prev) => ({ ...prev, title: '' }));
+  };
+  
+  const changeText = (e) => {
+    const text = e.target.value;
+    if (!text.trim()) {
+      setErrors((prev) => ({ ...prev, text: 'Text should be more than 0 characters' }));
+      return;
+    }
+    setBannerText(text);
+    setErrors((prev) => ({ ...prev, text: '' }));
+  };
+  
+  
   return (
     <div>
       <div className="banner">
@@ -86,17 +101,19 @@ function App() {
             <input
               type="text"
               value={bannerTitle}
-              onChange={(e) => setBannerTitle(e.target.value)}
+              onChange={changeTitle}
               placeholder="Enter banner title"
               className="text-input"
             />
+             {errors.title && <p className="error">{errors.title}</p>}
             <textarea
               value={bannerText}
-              onChange={(e) => setBannerText(e.target.value)}
+              onChange={changeText}
               placeholder="Enter banner description"
               rows={3}
               className="text-input"
             />
+             {errors.text && <p className="error">{errors.text}</p>}
           </div>
 
           <div className="control-section">
