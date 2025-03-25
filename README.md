@@ -1,7 +1,15 @@
 
 
-# Web App for interactive banner design 
-An engaging, dynamic banner section for web applications with user-triggered animations and interactions
+# Web App for interactive banner design  🎨🚀
+# Overview
+This project is a stylish and interactive animated banner designed to enhance websites, social media, or promotional campaigns. It features smooth animations, responsive design, and customizable elements to fit different branding needs.
+
+# Features
+✅ Fully Responsive – Adapts to different screen sizes 📱💻 </br>
+✅ Smooth Animations – Eye-catching motion effects ✨ </br>
+✅ Lightweight & Fast – Optimized for performance ⚡ </br>
+✅ Easy to Customize – Modify colors, text, and styles 🎨 </br>
+✅ Free & Open-Source – Available for everyone to use 💡 </br>
 
 ![alt text](https://github.com/nedjwab/interactive-banner/blob/create-banner/src/assets/images/demo.png)
 
