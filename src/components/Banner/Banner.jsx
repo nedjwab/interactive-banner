@@ -252,7 +252,7 @@ const Banner = () => {
               </label>
             </div>
             <div className="bg-color-controls" style={{ position: "relative" }}>
-              <p>Baground Color :</p>
+              <label>Background Color :</label>
               <input  style={{ width: "30px", height: "30px", borderRadius: "4px", cursor: "pointer", border: "none" }} type='color' value={bgColor} onChange={(e) => setBgColor(e.target.value)} />
             </div>
           </div>

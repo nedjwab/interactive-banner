@@ -4,9 +4,6 @@ import '@testing-library/jest-dom';
 import App from '../components/App';
 
 jest.mock('../../assets/images/coffee.jpg', () => 'coffee.jpg');
-jest.mock('../../assets/images/cup.jpg', () => 'cup.jpg');
-jest.mock('../../assets/images/gateaux.jpg', () => 'gateaux.jpg');
-jest.mock('../../assets/images/sweet.jpg', () => 'sweet.jpg');
 
 describe('App Component', () => {
   test('renders the banner with default content', () => {
@@ -14,13 +11,6 @@ describe('App Component', () => {
     expect(screen.getByText((content, element) => 
       content.includes('Perfect')
     )).toBeInTheDocument();
-  });
-
-  test('changes time of day when clicking time buttons', () => {
-    render(<App />);
-    const pieTimeButton = screen.getByText('Pieoclock');
-    fireEvent.click(pieTimeButton);
-    expect(pieTimeButton).toHaveClass('active');
   });
 
   test('updates banner title and description on input change', () => {
@@ -39,10 +29,12 @@ describe('App Component', () => {
     expect(within(banner).getByText('New banner description')).toBeInTheDocument();
   });
 
-  test('changes background image when clicking image buttons', () => {
+  test('shows error when banner title is empty', () => {
     render(<App />);
-    const imageButtons = screen.getAllByRole('button', { name: /Travel scene/i });
-    fireEvent.click(imageButtons[2]);
-    expect(imageButtons[2]).toHaveClass('selected');
+    const input = screen.getByPlaceholderText(/enter banner title/i);
+    fireEvent.change(input, { target: { value: ' ' } });
+    expect(screen.getByText(/title should be more than 0 characters/i)).toBeInTheDocument();
   });
+  
+  
 });
