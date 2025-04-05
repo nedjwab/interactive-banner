@@ -1,40 +1,29 @@
-import React, { useMemo, useState, useCallback } from 'react';
-import { LuCroissant } from "react-icons/lu";
+import React, { useState, useCallback } from 'react';
 import { CiText,CiCamera } from "react-icons/ci";
 import { LuUpload } from "react-icons/lu";
-import { TbCookie } from "react-icons/tb";
-import { GiPieSlice } from "react-icons/gi";
-import { BsCake2 } from "react-icons/bs";
 import { HexColorPicker } from 'react-colorful';
+import { IoCloseOutline } from "react-icons/io5";
 import coffee from '../../assets/images/coffee.jpg';
-import cup from '../../assets/images/cup.jpg';
-import gateaux from '../../assets/images/gateaux.jpg';
-import sweet from '../../assets/images/sweet.jpg';
 import './Banner.css';
 
 const Banner = () => {
-  const [timeOfDay, setTimeOfDay] = useState('croissanthours');
+
   const [bannerTitle, setBannerTitle] = useState('Coffee & Pastries: The Perfect Pair!');
   const [bannerText, setBannerText] = useState(
     'Start your day with the perfect blend of rich, aromatic coffee and freshly baked pastries. A match made in heaven for every coffee lover!'
   );
-  const [selectedImage, setSelectedImage] = useState(0);
+  const [selectedImage, setSelectedImage] = useState(coffee);
   const [errors, setErrors] = useState({ title: '', text: '' });
-  const [textColor, setTextColor] = useState('#ffffff');
-  const [fontSize, setFontSize] = useState({ title: 48, description: 18 });
+  const [textColor, setTextColor] = useState('#000000');
+  const [fontSize, setFontSize] = useState({ title: 17.6, description: 15 });
   const [fontWeight, setFontWeight] = useState({ title: 700, description: 400 });
   const [customImage, setCustomImage] = useState(null);
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [bgColor, setBgColor] = useState('#ffffff');
   const [showBgColorPicker, setShowBgColorPicker] = useState(false);
-  const images = [coffee, cup, gateaux, sweet];
+  const [isVisible, setIsVisible] = useState(true);
+ 
   
-  const CakeIcon = useMemo(() => ({
-    croissanthours: LuCroissant,
-    macarontime: TbCookie,
-    pieoclock: GiPieSlice,
-    mooncakemode: BsCake2
-  }[timeOfDay]), [timeOfDay]);
 
   const handleImageUpload = useCallback((e) => {
     const file = e.target.files?.[0];
@@ -67,34 +56,37 @@ const Banner = () => {
     setErrors((prev) => ({ ...prev, text: '' }));
   };
 
+  const handleCloseBanner = () => {
+    setIsVisible(!isVisible); 
+  }
+
   const resetBanner = () => {
-    setTimeOfDay('croissanthours');
     setBannerTitle('Coffee & Pastries: The Perfect Pair!');
     setBannerText('Start your day with the perfect blend of rich, aromatic coffee and freshly baked pastries. A match made in heaven for every coffee lover!');
-    setSelectedImage(0);
+    setSelectedImage(coffee);
     setCustomImage(null);
     setErrors({ title: '', text: '' });
-    setTextColor('#ffffff');
-    setFontSize({ title: 48, description: 18 });
+    setTextColor('#000000');
+    setFontSize({ title: 18, description: 16 });
     setFontWeight({ title: 700, description: 400 });
     setShowColorPicker(false);
+    setBgColor('#ffffff');
   };
 
   return (
+    <>
+    
     <div>
-      <div className="banner">
+    {isVisible && (
+      <div className="banner" style={{ backgroundColor: bgColor }}>
+        <div className='banner-elements' >
         <img 
-          src={customImage || images[selectedImage]} 
-          alt="Banner background" 
+          src={customImage || selectedImage} 
+          alt="Coffee image" 
           className="banner-image"
         />
-        <div className={`banner-overlay ${timeOfDay}`} />
         <div className="banner-content" data-aos="fade-up-right">
-          <div className="banner-text">
-            <div className="banner-icons">
-              <GiPieSlice className="icon large" />
-              <CakeIcon className="icon large" />
-            </div>
+          <div className="banner-text"> 
             <h1 
               className="banner-title animate__animated animate__bounceInLeft"
               style={{ 
@@ -115,51 +107,41 @@ const Banner = () => {
             >
               {bannerText}
             </p>
+            <button className='buttons donate-button'>Donate now</button>
+            <button className='buttons more-bitton'>Learn More</button>
           </div>
+        
+        </div>
+        <IoCloseOutline className='close-icon ' fontSize={"25px"} onClick={handleCloseBanner}/>
         </div>
       </div>
-
+       )}
       <div className="controls">
         <div className="controls-panel">
           <div className='controls-header'>
           <h2 className="controls-title">Customize Your Experience</h2>
           <button className="reset-button" onClick={resetBanner}>
-            Reset Customization
+            Reset
           </button>
           </div>
       
           <div className="control-section">
             <h3 className="control-heading">
-              <TbCookie className="icon" /> Background Filters
-            </h3>
-            <div className="time-buttons">
-              {['croissanthours', 'macarontime', 'pieoclock', 'mooncakemode'].map((time) => (
-                <button
-                  key={time}
-                  onClick={() => setTimeOfDay(time)}
-                  className={`time-button ${timeOfDay === time ? 'active' : ''}`}
-                >
-                  {time.charAt(0).toUpperCase() + time.slice(1)}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="control-section">
-            <h3 className="control-heading">
               <CiText className="icon" /> Text Styling
             </h3>
             <div className="text-controls">
-              <div className="color-picker-container">
-                <button 
-                  className="color-picker-button"
-                  onClick={() => setShowColorPicker(!showColorPicker)}
-                >
-                  Text Color
-                </button>
+              <div className="color-picker-container" style={{ position: "relative" }}>
+              <div 
+                className="color-picker-square" 
+                style={{ backgroundColor: textColor, width: "30px", height: "30px", borderRadius: "4px", cursor: "pointer", border: "1px solid #ccc" }}
+                onClick={() => {
+                  setShowColorPicker(!showColorPicker);
+                  setShowBgColorPicker(false);
+                }}
+              ></div>
                 {showColorPicker && (
                   <div className="color-picker-popup">
-                    <HexColorPicker color={textColor} onChange={setTextColor} />
+                    <HexColorPicker color={textColor} onChange={setTextColor} onMouseUp={() => setShowColorPicker(false)} />
                   </div>
                 )}
               </div>
@@ -269,28 +251,16 @@ const Banner = () => {
                 />
               </label>
             </div>
-            <div className="image-grid">
-              {images.map((image, index) => (
-                <button
-                  key={index}
-                  onClick={() => {
-                    setSelectedImage(index);
-                    setCustomImage(null);
-                  }}
-                  className={`image-button ${selectedImage === index && !customImage ? 'selected' : ''}`}
-                  data-aos="flip-right"
-                >
-                  <img
-                    src={image}
-                    alt={`Travel scene ${index + 1}`}
-                  />
-                </button>
-              ))}
+            <div className="bg-color-controls" style={{ position: "relative" }}>
+              <p>Baground Color :</p>
+              <input  style={{ width: "30px", height: "30px", borderRadius: "4px", cursor: "pointer", border: "none" }} type='color' value={bgColor} onChange={(e) => setBgColor(e.target.value)} />
             </div>
           </div>
         </div>
       </div>
     </div>
+ 
+   </>
   );
 }
 
