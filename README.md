@@ -4,6 +4,9 @@
 # Overview
 This project is a stylish and interactive animated banner designed to enhance websites, social media, or promotional campaigns. It features smooth animations, responsive design, and customizable elements to fit different branding needs.
 
+# Demo Link
+https://nedjwab.github.io/interactive-banner/
+
 # Features
 ✅ Fully Responsive – Adapts to different screen sizes 📱💻 </br>
 ✅ Smooth Animations – Eye-catching motion effects ✨ </br>
